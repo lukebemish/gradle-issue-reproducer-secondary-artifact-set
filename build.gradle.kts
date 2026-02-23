@@ -1,6 +1,6 @@
 val someAttribute = Attribute.of("someAttribute", String::class.java)
 
-val variantName by configurations.consumable() {
+val variantName = configurations.consumable("variantName") {
     attributes {
         attribute(someAttribute, "gizmo")
     }
@@ -13,9 +13,9 @@ val variantName by configurations.consumable() {
     }
 }
 
-val stuff by configurations.dependencyScope()
-val stuffResolved by configurations.resolvable() {
-    extendsFrom(stuff)
+val stuff = configurations.dependencyScope("stuff")
+val stuffResolved = configurations.resolvable("stuffResolved") {
+    extendsFrom(stuff.get())
     attributes {
         attribute(someAttribute, "gizmo")
     }
@@ -26,7 +26,8 @@ dependencies {
 }
 
 tasks.register("resolveStuff") {
-    dependsOn(stuffResolved)
+    dependsOn(stuffResolved.get())
 }
+
 
 
