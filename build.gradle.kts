@@ -1,4 +1,4 @@
-val someAttribute = Attribute.of("someAttribute", String.class)
+val someAttribute = Attribute.of("someAttribute", String::class.java)
 
 val variantName by configurations.consumable {
     attributes {
@@ -28,3 +28,4 @@ dependencies {
 tasks.register("resolveStuff") {
     dependsOn(stuffResolved)
 }
+
